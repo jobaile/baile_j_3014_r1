@@ -21,23 +21,23 @@
 
 <!--Shows login time-->
     <?php
-        $timeQuery = 'SELECT * FROM tbl_users WHERE user_date = '.$loginTime;
         $loginTime = ($_COOKIE['user_date']);
-        
+        $timeQuery = 'SELECT * FROM tbl_users WHERE user_date = '.$loginTime;
+
         if(!isset($_COOKIE[$timeQuery])) {
             echo '<h3>Welcome back!</h3>
-            You last visited on: '.date("D, M. d, y H:i", time() + $loginTime);
+            You last visited on: '.date("D, M. d, y H:i");
         } else {
             echo 'Welcome to my site';
         }
     ?>
+<!--Show login time end-->
 
-
-        <nav>
-            <ul>
-                <li><a href="admin/scripts/caller.php?caller_id=logout">Sign Out</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <ul>
+            <li><a href="admin/scripts/caller.php?caller_id=logout">Sign Out</a></li>
+        </ul>
+    </nav>
 
 </body>
 </html>
