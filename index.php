@@ -37,7 +37,7 @@
         $timeQuery = 'SELECT * FROM tbl_users WHERE user_date = '.$loginTime;
 
         if(!isset($_COOKIE[$timeQuery])) {
-            echo 'You last visited on: '.date('D, M. d, y H:i');
+            echo 'You last visited on: '.date('D, M. d, Y \a\t g:ia');
         } else {
             //Ideally this would what would show up if they haven't visited the site before?
             // Don't how this would work, will have to do further research

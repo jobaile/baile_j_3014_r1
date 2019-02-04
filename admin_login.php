@@ -1,5 +1,7 @@
 <?php 
-	require_once('admin/scripts/config.php'); //conects to the php
+    require_once('admin/scripts/config.php'); //conects to the php
+    session_start(); //starts the session for the failed login attempts
+    
 	if(empty($_POST['username']) || empty($_POST['password'])){
 		$message = 'Missing Fields';
 	}else{
@@ -7,7 +9,27 @@
 		$password = $_POST['password'];
 
 		$message = login($username,$password);
-	}
+    }
+    
+    //Failed login attempts
+    if(!empty($password)){ //if the password is not correct or empty, it will count as a failed login
+        if (isset($_SESSION['loginAttempts'])){
+           $_SESSION['loginAttempts']++; //this adds the number of logins
+           if ($_SESSION['loginAttempts'] > 2){
+             echo 'You have exceeded the amount of login attempts! Please try again later.';
+             ?> 
+             <!--Uses the CSS property to hide the login form-->        
+             <style>
+                #login{display:none;}
+             </style>
+            <!--Uses the CSS property to hide the login form-->        
+                <?php 
+           } 
+        } else {
+            $_SESSION['loginAttempts'] = 1; //Shows a message on the first attempt
+            echo 'Please make sure to fill in the correct information';
+        }  
+    }
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +47,7 @@
 	<p><?php echo $message;?></p>
 <?php endif;?>
 
-    <form action="admin_login.php" method="post"> <!-- use post to keep username and pw private-->
+    <form id="login"action="admin_login.php" method="post"> <!-- use post to keep username and pw private-->
          <label for="username">Username:
         <input type="text" name="username" value="" required>
         </label>

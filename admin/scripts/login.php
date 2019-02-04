@@ -44,7 +44,7 @@ function login($username, $password){
 		} 
 
 		if(empty($id)){
-			$message = 'Login Failed!!!!';
+			$message = 'Login Failed!';
 			return $message;
 		}
 
@@ -54,3 +54,6 @@ function login($username, $password){
 		return $message;
 	}
 }
+
+
+ 
