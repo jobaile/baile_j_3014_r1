@@ -1,5 +1,8 @@
-<?php require_once('admin/scripts/config.php');
-	confirm_logged_in();
+<?php 
+    require_once('admin/scripts/config.php');
+    confirm_logged_in();
+    setcookie($cookie_query, time()); //I read that this needs to be before html
+    date_default_timezone_set("America/Toronto"); //This sets the timezone to EST (America/Toronto)
 ?>
 
 <!DOCTYPE html>
@@ -13,18 +16,41 @@
 </head>
 <body>
 
-<h1>Dashboard</h1>
-    <h3>Welcome <?php echo $_SESSION['user_name'];?></h3>
-        <p>This is your user page</p>
+<h1>User Dashboard</h1>
+    <h2>Hello, <?php echo $_SESSION['user_name'];?></h2> 
 
-        <nav>
-            <ul>
-                <li><a href="#">Create User</a></li>
-                <li><a href="#">Edit User</a></li>
-                <li><a href="#">Delete User</a></li>
-                <li><a href="admin/scripts/caller.php?caller_id=logout">Sign Out</a></li>
-            </ul>
-        </nav>
+    <?php 
+    //Start of different messages depending on time of day
+        $time = date("H"); //This will set the variable to a 24 hour clock
+        if ($time < "12") { //Before 1200 is the morning
+            echo "<h2>Good morning!</h2>";
+        } elseif ($time >= "12" && $time < "17") { //Between 1200 and 1700 is the afternoon
+            echo "<h2>Good afternoon!</h2>";
+        } elseif ($time >= "17" && $time < "19") { //Between 1700 & 1900 it is evening
+            echo "<h2>Good evening!</h2>";
+        } elseif ($time >= "19") { //After 1900 it is night time
+            echo "Oh, you're up so late! Good night";
+        }
+    //End of different messages
+    //Start of login time
+        $loginTime = ($_COOKIE['user_date']); //sets the cookie for when user is last logged in
+        $timeQuery = 'SELECT * FROM tbl_users WHERE user_date = '.$loginTime;
+
+        if(!isset($_COOKIE[$timeQuery])) {
+            echo 'You last visited on: '.date('D, M. d, Y \a\t g:ia');
+        } else {
+            //Ideally this would what would show up if they haven't visited the site before?
+            // Don't how this would work, will have to do further research
+            echo 'Welcome to my site!';
+        }
+    //End of login time
+    ?>
+
+    <nav>
+        <ul>
+            <li><a href="admin/scripts/caller.php?caller_id=logout">Sign Out</a></li>
+        </ul>
+    </nav>
 
 </body>
 </html>

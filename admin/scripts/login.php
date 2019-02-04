@@ -7,7 +7,7 @@ function login($username, $password){
 	$check_exist_query = 'SELECT COUNT(*) FROM tbl_user';
 	$check_exist_query .= ' WHERE user_name = :username';
 
-	echo $check_exist_query;
+	//echo $check_exist_query;
 	
 	$user_set = $pdo->prepare($check_exist_query);
 	$user_set->execute(
@@ -44,7 +44,7 @@ function login($username, $password){
 		} 
 
 		if(empty($id)){
-			$message = 'Login Failed!!!!';
+			$message = 'Login Failed!';
 			return $message;
 		}
 
@@ -54,3 +54,6 @@ function login($username, $password){
 		return $message;
 	}
 }
+
+
+ 
