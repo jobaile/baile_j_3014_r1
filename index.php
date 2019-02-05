@@ -24,11 +24,9 @@
         $time = date("H"); //This will set the variable to a 24 hour clock
         if ($time < "12") { //Before 1200 is the morning
             echo "<h2>Good morning!</h2>";
-        } elseif ($time >= "12" && $time < "17") { //Between 1200 and 1700 is the afternoon
+        } elseif ($time >= "12" && $time < "18") { //Between 1200 and 1800 is the afternoon
             echo "<h2>Good afternoon!</h2>";
-        } elseif ($time >= "17" && $time < "19") { //Between 1700 & 1900 it is evening
-            echo "<h2>Good evening!</h2>";
-        } elseif ($time >= "19") { //After 1900 it is night time
+        } elseif ($time >= "18") { //After 1800 it is night time
             echo "Oh, you're up so late! Good night";
         }
     //End of different messages

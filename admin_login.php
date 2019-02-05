@@ -27,7 +27,7 @@
            } 
         } else {
             $_SESSION['loginAttempts'] = 1; //Shows a message on the first attempt
-            echo 'Please make sure to fill in the correct information';
+            echo 'Please make sure to fill in the correct information!';
         }  
     }
 ?>
